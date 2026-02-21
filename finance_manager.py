@@ -2,9 +2,9 @@ import json
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FILE_NAME = os.path.join(BASE_DIR, "finance_data.json")
+FILE_NAME = os.path.join(BASE_DIR, "finance_expense_list.json")
 
-def load_data():
+def load_expense_list():
     if not os.path.exists(FILE_NAME):
         return[]
     try:
@@ -13,6 +13,42 @@ def load_data():
         
     except json.JSONDecodeError:
         return[]
-def save_data(data):
+def save_expense_list(expense_list):
     with open (FILE_NAME, "w") as file:
-        return json.dump(data, file, indent=4)
+        return json.dump(expense_list, file, indent=4)
+
+#LOGIC LAYER
+def get_new_id(expense_list):
+    if not expense_list:
+        return 1
+    else:
+        return max(d["id"] for d in expense_list) +1
+    
+def add_expense(expense_list, date, item, amount, category,  payment_method, notes):
+    new_expense = {
+        "id": get_new_id,
+        "date": date,
+        "item": item,
+        "amount": amount,
+        "category": category,
+        "payment_method": payment_method,
+        "notes": notes
+    }
+    expense_list.append(new_expense)
+
+def delete_expense(expense_list, id):
+    for d in expense_list:
+        if d["id"] == id:
+            expense_list.remove(d)
+            return True
+    return False
+
+#UI_LAYER
+MENU = """
+a - Add Expense
+v - View All Expenses (Table View)
+s - Statistics & Summaries (Total spent, Budget check)
+f - Filter by Category
+d - Delete Expense
+e - Exit
+"""
