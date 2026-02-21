@@ -1,0 +1,498 @@
+[
+    {
+        "id": 1,
+        "date": "2026-01-05",
+        "item": "Mechanical Keyboard",
+        "amount": 120.50,
+        "category": "Electronics",
+        "payment_method": "Credit Card",
+        "notes": "Work from home setup"
+    },
+    {
+        "id": 2,
+        "date": "2026-01-07",
+        "item": "Monitor Stand",
+        "amount": 45.00,
+        "category": "Electronics",
+        "payment_method": "Debit Card",
+        "notes": "Ergonomic upgrade"
+    },
+    {
+        "id": 3,
+        "date": "2026-01-15",
+        "item": "USB-C Hub",
+        "amount": 35.99,
+        "category": "Electronics",
+        "payment_method": "Cash",
+        "notes": "Travel adapter"
+    },
+    {
+        "id": 4,
+        "date": "2026-02-01",
+        "item": "Wireless Mouse",
+        "amount": 59.00,
+        "category": "Electronics",
+        "payment_method": "Credit Card",
+        "notes": "Replacement for broken one"
+    },
+    {
+        "id": 5,
+        "date": "2026-02-10",
+        "item": "Noise Cancelling Headphones",
+        "amount": 299.00,
+        "category": "Electronics",
+        "payment_method": "Credit Card",
+        "notes": "Deep focus sessions"
+    },
+    {
+        "id": 6,
+        "date": "2026-01-02",
+        "item": "Starbucks Coffee",
+        "amount": 6.50,
+        "category": "Food & Dining",
+        "payment_method": "Mobile Pay",
+        "notes": "Morning fuel"
+    },
+    {
+        "id": 7,
+        "date": "2026-01-12",
+        "item": "Pizza Night",
+        "amount": 28.40,
+        "category": "Food & Dining",
+        "payment_method": "Credit Card",
+        "notes": "Friday treat"
+    },
+    {
+        "id": 8,
+        "date": "2026-01-22",
+        "item": "Sushi Dinner",
+        "amount": 52.00,
+        "category": "Food & Dining",
+        "payment_method": "Credit Card",
+        "notes": "Birthday dinner"
+    },
+    {
+        "id": 9,
+        "date": "2026-02-05",
+        "item": "Brunch with Friends",
+        "amount": 35.00,
+        "category": "Food & Dining",
+        "payment_method": "Debit Card",
+        "notes": "Sunday social"
+    },
+    {
+        "id": 10,
+        "date": "2026-02-18",
+        "item": "Burger King",
+        "amount": 12.50,
+        "category": "Food & Dining",
+        "payment_method": "Cash",
+        "notes": "Quick lunch"
+    },
+    {
+        "id": 11,
+        "date": "2026-01-03",
+        "item": "Uber Ride",
+        "amount": 18.20,
+        "category": "Transport",
+        "payment_method": "Mobile Pay",
+        "notes": "To downtown"
+    },
+    {
+        "id": 12,
+        "date": "2026-01-10",
+        "item": "Gas Station",
+        "amount": 55.00,
+        "category": "Transport",
+        "payment_method": "Credit Card",
+        "notes": "Full tank"
+    },
+    {
+        "id": 13,
+        "date": "2026-01-25",
+        "item": "Monthly Subway Pass",
+        "amount": 90.00,
+        "category": "Transport",
+        "payment_method": "Debit Card",
+        "notes": "Commute"
+    },
+    {
+        "id": 14,
+        "date": "2026-02-08",
+        "item": "Parking Fee",
+        "amount": 15.00,
+        "category": "Transport",
+        "payment_method": "Cash",
+        "notes": "Mall parking"
+    },
+    {
+        "id": 15,
+        "date": "2026-02-20",
+        "item": "Train Ticket",
+        "amount": 42.00,
+        "category": "Transport",
+        "payment_method": "Credit Card",
+        "notes": "Weekend getaway"
+    },
+    {
+        "id": 16,
+        "date": "2026-01-04",
+        "item": "Weekly Groceries",
+        "amount": 85.30,
+        "category": "Groceries",
+        "payment_method": "Debit Card",
+        "notes": "Milk, eggs, veg"
+    },
+    {
+        "id": 17,
+        "date": "2026-01-11",
+        "item": "Whole Foods",
+        "amount": 112.00,
+        "category": "Groceries",
+        "payment_method": "Credit Card",
+        "notes": "Organic haul"
+    },
+    {
+        "id": 18,
+        "date": "2026-01-18",
+        "item": "Trader Joe's",
+        "amount": 64.50,
+        "category": "Groceries",
+        "payment_method": "Debit Card",
+        "notes": "Snacks and frozen meals"
+    },
+    {
+        "id": 19,
+        "date": "2026-02-02",
+        "item": "Local Market",
+        "amount": 22.10,
+        "category": "Groceries",
+        "payment_method": "Cash",
+        "notes": "Fresh fruit"
+    },
+    {
+        "id": 20,
+        "date": "2026-02-15",
+        "item": "Costco Run",
+        "amount": 210.00,
+        "category": "Groceries",
+        "payment_method": "Credit Card",
+        "notes": "Bulk essentials"
+    },
+    {
+        "id": 21,
+        "date": "2026-01-01",
+        "item": "Electricity Bill",
+        "amount": 78.40,
+        "category": "Utilities",
+        "payment_method": "Bank Transfer",
+        "notes": "December usage"
+    },
+    {
+        "id": 22,
+        "date": "2026-01-05",
+        "item": "High Speed Internet",
+        "amount": 60.00,
+        "category": "Utilities",
+        "payment_method": "Credit Card",
+        "notes": "Monthly fiber"
+    },
+    {
+        "id": 23,
+        "date": "2026-01-20",
+        "item": "Water Bill",
+        "amount": 32.50,
+        "category": "Utilities",
+        "payment_method": "Bank Transfer",
+        "notes": "Quarterly adjustment"
+    },
+    {
+        "id": 24,
+        "date": "2026-02-01",
+        "item": "Phone Plan",
+        "amount": 45.00,
+        "category": "Utilities",
+        "payment_method": "Debit Card",
+        "notes": "Unlimited data"
+    },
+    {
+        "id": 25,
+        "date": "2026-02-12",
+        "item": "Heating Bill",
+        "amount": 105.20,
+        "category": "Utilities",
+        "payment_method": "Credit Card",
+        "notes": "Winter peak"
+    },
+    {
+        "id": 26,
+        "date": "2026-01-08",
+        "item": "Netflix Subscription",
+        "amount": 15.99,
+        "category": "Entertainment",
+        "payment_method": "Credit Card",
+        "notes": "Monthly sub"
+    },
+    {
+        "id": 27,
+        "date": "2026-01-14",
+        "item": "Cinema Tickets",
+        "amount": 24.00,
+        "category": "Entertainment",
+        "payment_method": "Debit Card",
+        "notes": "Sci-fi movie night"
+    },
+    {
+        "id": 28,
+        "date": "2026-01-30",
+        "item": "Concert Ticket",
+        "amount": 150.00,
+        "category": "Entertainment",
+        "payment_method": "Credit Card",
+        "notes": "Summer festival early bird"
+    },
+    {
+        "id": 29,
+        "date": "2026-02-04",
+        "item": "Kindle E-book",
+        "amount": 9.99,
+        "category": "Entertainment",
+        "payment_method": "Mobile Pay",
+        "notes": "New thriller"
+    },
+    {
+        "id": 30,
+        "date": "2026-02-14",
+        "item": "Spotify Family",
+        "amount": 16.99,
+        "category": "Entertainment",
+        "payment_method": "Credit Card",
+        "notes": "Audio streaming"
+    },
+    {
+        "id": 31,
+        "date": "2026-01-06",
+        "item": "Gym Membership",
+        "amount": 50.00,
+        "category": "Health & Wellness",
+        "payment_method": "Debit Card",
+        "notes": "Monthly fee"
+    },
+    {
+        "id": 32,
+        "date": "2026-01-21",
+        "item": "Pharmacy",
+        "amount": 22.50,
+        "category": "Health & Wellness",
+        "payment_method": "Cash",
+        "notes": "Vitamins and cold meds"
+    },
+    {
+        "id": 33,
+        "date": "2026-02-03",
+        "item": "Yoga Class",
+        "amount": 20.00,
+        "category": "Health & Wellness",
+        "payment_method": "Mobile Pay",
+        "notes": "Drop-in session"
+    },
+    {
+        "id": 34,
+        "date": "2026-02-11",
+        "item": "Dentist Checkup",
+        "amount": 85.00,
+        "category": "Health & Wellness",
+        "payment_method": "Credit Card",
+        "notes": "Routine cleaning"
+    },
+    {
+        "id": 35,
+        "date": "2026-02-19",
+        "item": "Therapy Session",
+        "amount": 100.00,
+        "category": "Health & Wellness",
+        "payment_method": "Debit Card",
+        "notes": "Mental health check"
+    },
+
+    {
+        "id": 36,
+        "date": "2026-01-09",
+        "item": "Standing Desk",
+        "amount": 350.00,
+        "category": "Electronics",
+        "payment_method": "Credit Card",
+        "notes": "Home office upgrade"
+    },
+    {
+        "id": 37,
+        "date": "2026-01-10",
+        "item": "Indian Takeout",
+        "amount": 42.50,
+        "category": "Food & Dining",
+        "payment_method": "Mobile Pay",
+        "notes": "Saturday night dinner"
+    },
+    {
+        "id": 38,
+        "date": "2026-01-13",
+        "item": "Bus Pass",
+        "amount": 25.00,
+        "category": "Transport",
+        "payment_method": "Cash",
+        "notes": "Weekly reload"
+    },
+    {
+        "id": 39,
+        "date": "2026-01-15",
+        "item": "Laundry Detergent",
+        "amount": 18.75,
+        "category": "Groceries",
+        "payment_method": "Debit Card",
+        "notes": "Household supplies"
+    },
+    {
+        "id": 40,
+        "date": "2026-01-17",
+        "item": "Trash Collection",
+        "amount": 30.00,
+        "category": "Utilities",
+        "payment_method": "Bank Transfer",
+        "notes": "Monthly fee"
+    },
+    {
+        "id": 41,
+        "date": "2026-01-19",
+        "item": "Museum Ticket",
+        "amount": 15.00,
+        "category": "Entertainment",
+        "payment_method": "Debit Card",
+        "notes": "Weekend trip"
+    },
+    {
+        "id": 42,
+        "date": "2026-01-21",
+        "item": "Protein Powder",
+        "amount": 45.99,
+        "category": "Health & Wellness",
+        "payment_method": "Credit Card",
+        "notes": "Supplements"
+    },
+    {
+        "id": 43,
+        "date": "2026-01-23",
+        "item": "External SSD",
+        "amount": 110.00,
+        "category": "Electronics",
+        "payment_method": "Credit Card",
+        "notes": "Backup drive"
+    },
+    {
+        "id": 44,
+        "date": "2026-01-25",
+        "item": "Cooking Class",
+        "amount": 75.00,
+        "category": "Food & Dining",
+        "payment_method": "Debit Card",
+        "notes": "Learning Thai food"
+    },
+    {
+        "id": 45,
+        "date": "2026-01-27",
+        "item": "Car Wash",
+        "amount": 12.00,
+        "category": "Transport",
+        "payment_method": "Cash",
+        "notes": "Monthly clean"
+    },
+    {
+        "id": 46,
+        "date": "2026-01-29",
+        "item": "Pet Food",
+        "amount": 55.20,
+        "category": "Groceries",
+        "payment_method": "Credit Card",
+        "notes": "Bulk cat food"
+    },
+    {
+        "id": 47,
+        "date": "2026-02-03",
+        "item": "Gas Bill",
+        "amount": 88.00,
+        "category": "Utilities",
+        "payment_method": "Bank Transfer",
+        "notes": "Cooking gas"
+    },
+    {
+        "id": 48,
+        "date": "2026-02-05",
+        "item": "Video Game",
+        "amount": 69.99,
+        "category": "Entertainment",
+        "payment_method": "Mobile Pay",
+        "notes": "New release"
+    },
+    {
+        "id": 49,
+        "date": "2026-02-07",
+        "item": "Eye Exam",
+        "amount": 120.00,
+        "category": "Health & Wellness",
+        "payment_method": "Credit Card",
+        "notes": "Annual checkup"
+    },
+    {
+        "id": 50,
+        "date": "2026-02-09",
+        "item": "Cloud Storage",
+        "amount": 9.99,
+        "category": "Electronics",
+        "payment_method": "Credit Card",
+        "notes": "Yearly plan"
+    },
+    {
+        "id": 51,
+        "date": "2026-02-11",
+        "item": "Ice Cream",
+        "amount": 8.50,
+        "category": "Food & Dining",
+        "payment_method": "Cash",
+        "notes": "Dessert"
+    },
+    {
+        "id": 52,
+        "date": "2026-02-13",
+        "item": "Bicycle Repair",
+        "amount": 45.00,
+        "category": "Transport",
+        "payment_method": "Debit Card",
+        "notes": "Flat tire fix"
+    },
+    {
+        "id": 53,
+        "date": "2026-02-16",
+        "item": "Toiletries",
+        "amount": 22.40,
+        "category": "Groceries",
+        "payment_method": "Mobile Pay",
+        "notes": "Soap and shampoo"
+    },
+    {
+        "id": 54,
+        "date": "2026-02-18",
+        "item": "Sewer Bill",
+        "amount": 25.00,
+        "category": "Utilities",
+        "payment_method": "Bank Transfer",
+        "notes": "City services"
+    },
+    {
+        "id": 55,
+        "date": "2026-02-21",
+        "item": "Movie Rental",
+        "amount": 5.99,
+        "category": "Entertainment",
+        "payment_method": "Credit Card",
+        "notes": "Digital rental"
+    }
+]
