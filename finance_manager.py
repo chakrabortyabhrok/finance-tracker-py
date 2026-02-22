@@ -74,3 +74,29 @@ f - Filter by Category
 d - Delete Expense
 e - Exit
 """
+
+def print_expenses(expense_list):
+    if not expense_list:
+        print("-- No Expense Recorded --")
+
+    print("ID |   DATE   |     ITEM     |  AMOUNT  |    CATEGORY    |  PAYMENT  |     NOTES    ")
+    print("-"*83)
+    for e in expense_list:
+        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <14} | {e["amount"]: >10.2f} | {e["category"]: <16} | {e["payment"]: <11} | {e["notes"]}")
+        print("-"*83) 
+
+def display_stats(total_spent, category_breakdown, budget_limit, payment_breakdown):
+    print(f"Total spent: {total_spent:.2f}")
+    print(f"Remaning Budget: {budget_limit - total_spent:.2f}")
+    if total_spent > budget_limit:
+        print("WARNING: Over Budget!!")
+    
+    print("Category Breakdown:\n")
+    for category, amount in category_breakdown.items():
+        print(f" {[category]:20}   ₹{[amount]: 8.2f}")
+    print()
+
+    print("Payment Breakdown: \n")
+    for payment, amount in payment_breakdown.items():
+        print(f"  {[payment]:20}  ₹{[amount]: 8.2f}")
+    print()
