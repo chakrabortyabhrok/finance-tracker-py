@@ -65,7 +65,7 @@ def calculate_stats(expense_list, budget_limit):
 
     return total_spent, category_breakdown, payment_breakdown
 
-#UI_LAYER
+
 MENU = """
 a - Add Expense
 v - View All Expenses (Table View)
