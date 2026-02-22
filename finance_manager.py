@@ -17,7 +17,6 @@ def save_expense_list(expense_list):
     with open (FILE_NAME, "w") as file:
         return json.dump(expense_list, file, indent=4)
 
-#LOGIC LAYER
 def get_new_id(expense_list):
     if not expense_list:
         return 1
@@ -42,6 +41,29 @@ def delete_expense(expense_list, id):
             expense_list.remove(d)
             return True
     return False
+
+def calculate_stats(expense_list, budget_limit):
+    total_spent = sum(e["category"] for e in expense_list)
+    category_breakdown = {}
+    payment_breakdown = {}
+    for e in expense_list:
+        cat = e["category"]
+        price = e["amount"]
+        method = e["payment_method"]
+
+        if cat in category_breakdown:
+            category_breakdown[cat] += price
+
+        else:
+            category_breakdown[cat] = price
+
+        if method in payment_breakdown:
+            payment_breakdown[method] += price
+
+        else:
+            payment_breakdown[method] = price
+
+    return total_spent, category_breakdown, payment_breakdown
 
 #UI_LAYER
 MENU = """
