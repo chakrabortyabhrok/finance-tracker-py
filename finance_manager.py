@@ -80,11 +80,11 @@ def print_expenses(expense_list):
     if not expense_list:
         print("-- No Expense Recorded --")
 
-    print("ID |   DATE   |     ITEM     |  AMOUNT  |    CATEGORY    |  PAYMENT  |     NOTES    ")
-    print("-"*83)
+    print("ID  |    DATE    |           ITEM            |   AMOUNT   |       CATEGORY       |     PAYMENT     |     NOTES    ")
+    print("-"*120)
     for e in expense_list:
-        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <14} | {e["amount"]: >10.2f} | {e["category"]: <16} | {e["payment_method"]: <11} | {e["notes"]}")
-    print("-"*83) 
+        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <25} | {e["amount"]: >10.2f} | {e["category"]: <20} | {e["payment_method"]: <15} | {e["notes"]}")
+    print("-"*120) 
 
 def display_stats(total_spent, category_breakdown, budget_limit, payment_breakdown):
     print(f"Total spent: {total_spent:.2f}")
@@ -145,6 +145,7 @@ def main():
             notes = input("Enter a note:")
             add_expense(expense, date, item, amount, category, payment_method, notes)
             save_expense_list(expense)
+            print("-- Expense Added --")
 
         elif choice == "v":
             print_expenses(expense)
@@ -153,7 +154,8 @@ def main():
             if not expense:
                 print("-- No expense found --")
             else:
-                calculate_stats(expense, MY_BUDGET)
+                total_spent, category_breakdown, payment_breakdown = calculate_stats(expense, MY_BUDGET)
+                display_stats(total_spent, category_breakdown, MY_BUDGET, payment_breakdown)
 
         elif choice == "e":
             print("-- Goodbye --")
