@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE_NAME = os.path.join(BASE_DIR, "finance_expense_list.json")
@@ -112,7 +113,43 @@ def filter_by_category(expense_list, category):
         print(f"{e["items"]:20} : ₹{e["amount"]:8.2f}")
 
 def main(expense_list):
-    MY_BUDGET = 3000
+    MY_BUDGET = 500
+    expense_list = load_expense_list()
+    print("-- Welcome to the Finance manager !! --")
+    print("Current Budget limit:", MY_BUDGET)
+    print()
+
+    while True:
+        print(MENU)
+        choice = input("Enter your choice: \n")
+
+        if choice == "a":
+            print("--- Add New Expense ---\n")
+            user_date = int(input("Enter date (DD-MM-YYYY) or press Enter for today: ")).strip()
+            if user_date == "":
+                date = datetime.today().strftime("%Y-%m-%d")
+            else:
+                date = user_date
+            
+            item = input("Name of the item: \n")
+            while True:
+                try:
+                    amount = int(input("Enter the amount: \n"))
+                    if amount > 0:
+
+                        break
+                    else:
+                        print("-- Please enter a positve amount --")
+                except ValueError:
+                    print("-- Invalid input. Please enter a number.--")
+            category = input("Enter the category: \n")
+            payment_method = input("Enter the payment method: \n")
+            notes = input("Enter a note:")
+            add_expense(date, item, amount, category, payment_method, notes)
+
+
+
+
 
 
 
