@@ -87,16 +87,35 @@ def print_expenses(expense_list):
 
 def display_stats(total_spent, category_breakdown, budget_limit, payment_breakdown):
     print(f"Total spent: {total_spent:.2f}")
-    print(f"Remaning Budget: {budget_limit - total_spent:.2f}")
+    print(f"Remaining Budget: {budget_limit - total_spent:.2f}")
     if total_spent > budget_limit:
-        print("WARNING: Over Budget!!")
+        print("⚠️ WARNING: Over Budget!!")
     
-    print("Category Breakdown:\n")
+    print("\nCategory Breakdown:\n")
     for category, amount in category_breakdown.items():
-        print(f" {[category]:20}   ₹{[amount]: 8.2f}")
+        print(f" {category:20}   ₹{amount: 8.2f}")
     print()
 
-    print("Payment Breakdown: \n")
+    print("\nPayment Breakdown:\n")
     for payment, amount in payment_breakdown.items():
-        print(f"  {[payment]:20}  ₹{[amount]: 8.2f}")
+        print(f"  {payment:20}  ₹{amount: 8.2f}")
     print()
+
+def filter_by_category(expense_list, category):
+    matches = (e for e in expense_list if e["category"].lower() == category.lower())
+
+    if not matches:
+        print(f"-- No expenses found for {category} --")
+
+    print(f"Expenses for {category}: \n")
+    for e in expense_list:
+        print(f"{e["items"]:20} : ₹{e["amount"]:8.2f}")
+
+def main(expense_list):
+    MY_BUDGET = 3000
+
+
+
+
+if __name__ == "__main__":
+    main()
