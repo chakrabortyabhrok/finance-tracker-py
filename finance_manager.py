@@ -3,20 +3,20 @@ import os
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FILE_NAME = os.path.join(BASE_DIR, "finance_expense_list.json")
+FILE_NAME = os.path.join(BASE_DIR, "finance_data.json")
 
 def load_expense_list():
     if not os.path.exists(FILE_NAME):
         return[]
     try:
         with open(FILE_NAME, "r") as file:
-            json.load(file)
-        
+            return json.load(file)
     except json.JSONDecodeError:
         return[]
+    
 def save_expense_list(expense_list):
     with open (FILE_NAME, "w") as file:
-        return json.dump(expense_list, file, indent=4)
+        json.dump(expense_list, file, indent=4)
 
 def get_new_id(expense_list):
     if not expense_list:
@@ -26,7 +26,7 @@ def get_new_id(expense_list):
     
 def add_expense(expense_list, date, item, amount, category,  payment_method, notes):
     new_expense = {
-        "id": get_new_id,
+        "id": get_new_id(expense_list),
         "date": date,
         "item": item,
         "amount": amount,
@@ -44,7 +44,7 @@ def delete_expense(expense_list, id):
     return False
 
 def calculate_stats(expense_list, budget_limit):
-    total_spent = sum(e["category"] for e in expense_list)
+    total_spent = sum(e["amount"] for e in expense_list)
     category_breakdown = {}
     payment_breakdown = {}
     for e in expense_list:
@@ -83,8 +83,8 @@ def print_expenses(expense_list):
     print("ID |   DATE   |     ITEM     |  AMOUNT  |    CATEGORY    |  PAYMENT  |     NOTES    ")
     print("-"*83)
     for e in expense_list:
-        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <14} | {e["amount"]: >10.2f} | {e["category"]: <16} | {e["payment"]: <11} | {e["notes"]}")
-        print("-"*83) 
+        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <14} | {e["amount"]: >10.2f} | {e["category"]: <16} | {e["payment_method"]: <11} | {e["notes"]}")
+    print("-"*83) 
 
 def display_stats(total_spent, category_breakdown, budget_limit, payment_breakdown):
     print(f"Total spent: {total_spent:.2f}")
@@ -112,12 +112,11 @@ def filter_by_category(expense_list, category):
     for e in expense_list:
         print(f"{e["items"]:20} : ₹{e["amount"]:8.2f}")
 
-def main(expense_list):
+def main():
     MY_BUDGET = 500
-    expense_list = load_expense_list()
+    expense = load_expense_list()
     print("-- Welcome to the Finance manager !! --")
     print("Current Budget limit:", MY_BUDGET)
-    print()
 
     while True:
         print(MENU)
@@ -125,7 +124,7 @@ def main(expense_list):
 
         if choice == "a":
             print("--- Add New Expense ---\n")
-            user_date = int(input("Enter date (DD-MM-YYYY) or press Enter for today: ")).strip()
+            user_date = input("Enter date (DD-MM-YYYY) or press Enter for today: ").strip()
             if user_date == "":
                 date = datetime.today().strftime("%Y-%m-%d")
             else:
@@ -134,9 +133,8 @@ def main(expense_list):
             item = input("Name of the item: \n")
             while True:
                 try:
-                    amount = int(input("Enter the amount: \n"))
+                    amount = float(input("Enter the amount: \n"))
                     if amount > 0:
-
                         break
                     else:
                         print("-- Please enter a positve amount --")
@@ -145,13 +143,24 @@ def main(expense_list):
             category = input("Enter the category: \n")
             payment_method = input("Enter the payment method: \n")
             notes = input("Enter a note:")
-            add_expense(date, item, amount, category, payment_method, notes)
+            add_expense(expense, date, item, amount, category, payment_method, notes)
+            save_expense_list(expense)
 
+        elif choice == "v":
+            print_expenses(expense)
 
+        elif choice == "s":
+            if not expense:
+                print("-- No expense found --")
+            else:
+                calculate_stats(expense, MY_BUDGET)
 
+        elif choice == "e":
+            print("-- Goodbye --")
+            break
 
-
-
+        else:
+            print("Invalid choice, try again.")
 
 
 if __name__ == "__main__":
