@@ -165,7 +165,7 @@ def main():
 
         elif choice == "d":
             if not expense:
-                print("-- No tasks to delete --")
+                print("-- No items to delete --")
             else:
                 try:
                     id_no = int(input("Enter the ID: \n"))
