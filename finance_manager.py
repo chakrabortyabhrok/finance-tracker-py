@@ -37,9 +37,9 @@ def add_expense(expense_list, date, item, amount, category,  payment_method, not
     expense_list.append(new_expense)
 
 def delete_expense(expense_list, id):
-    for d in expense_list:
-        if d["id"] == id:
-            expense_list.remove(d)
+    for e in expense_list:
+        if e["id"] == id:
+            expense_list.remove(e)
             return True
     return False
 
@@ -67,6 +67,7 @@ def calculate_stats(expense_list, budget_limit):
     return total_spent, category_breakdown, payment_breakdown
 
 MENU = """
+c - Current Balance
 a - Add Expense
 v - View All Expenses (Table View)
 s - Statistics & Summaries (Total spent, Budget check)
@@ -107,7 +108,7 @@ def filter_by_category(expense_list, category):
     return matches
 
 def main():
-    MY_BUDGET = 500
+    MY_BUDGET = 5000
     expense = load_expense_list()
     print("-- Welcome to the Finance manager !! --")
     print("Current Budget limit:", MY_BUDGET)
@@ -116,7 +117,10 @@ def main():
         print(MENU)
         choice = input("Enter your choice: \n").lower().strip()
 
-        if choice == "a":
+        if choice == "c":
+            print("Current Budget limit:", MY_BUDGET)
+
+        elif choice == "a":
             print("--- Add New Expense ---\n")
             user_date = input("Enter date (DD-MM-YYYY) or press Enter for today: ").strip()
             if user_date == "":
@@ -134,6 +138,7 @@ def main():
                         print("-- Please enter a positve amount --")
                 except ValueError:
                     print("-- Invalid input. Please enter a number.--")
+
             category = input("Enter the category: \n").capitalize()
             payment_method = input("Enter the payment method: \n").capitalize()
             notes = input("Enter a note:\n").capitalize()
@@ -158,6 +163,20 @@ def main():
             print(f"\nExpenses for {target_category}:")
             print_expenses(filtered)
 
+        elif choice == "d":
+            if not expense:
+                print("-- No tasks to delete --")
+            else:
+                try:
+                    id_no = int(input("Enter the ID: \n"))
+                    if delete_expense(expense, id_no):
+                        save_expense_list(expense)
+                        print("-- Expense Deleted --")
+                    else:
+                        print("-- No tasks exists with given ID --")
+
+                except ValueError:
+                    print("-- Invalid input. Please enter a number. --")
 
         elif choice == "e":
             print("-- Goodbye --")

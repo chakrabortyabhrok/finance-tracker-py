@@ -493,23 +493,5 @@
         "category": "Entertainment",
         "payment_method": "Credit Card",
         "notes": "Digital rental"
-    },
-    {
-        "id": 56,
-        "date": "2026-02-24",
-        "item": "fsfsfd",
-        "amount": 20.0,
-        "category": "dzdsff",
-        "payment_method": "cash",
-        "notes": "fgsrg"
-    },
-    {
-        "id": 57,
-        "date": "2026-02-24",
-        "item": "Fsdfdsf",
-        "amount": 20.0,
-        "category": "Fsdfds",
-        "payment_method": "Cash",
-        "notes": "Sample try"
     }
 ]
