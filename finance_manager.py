@@ -66,8 +66,10 @@ def calculate_stats(expense_list, budget_limit):
 
     return total_spent, category_breakdown, payment_breakdown
 
+
 MENU = """
 c - Current Balance
+u - Update Current Budget
 a - Add Expense
 v - View All Expenses (Table View)
 s - Statistics & Summaries (Total spent, Budget check)
@@ -107,6 +109,7 @@ def filter_by_category(expense_list, category):
 
     return matches
 
+
 def main():
     MY_BUDGET = 5000
     expense = load_expense_list()
@@ -118,7 +121,21 @@ def main():
         choice = input("Enter your choice: \n").lower().strip()
 
         if choice == "c":
-            print("Current Budget limit:", MY_BUDGET)
+            print(MY_BUDGET)
+
+        elif choice == "u":
+            try:
+                changed_budget = float(input("Enter the budget: \n"))
+                if changed_budget > 0:
+                    MY_BUDGET = changed_budget
+                    save_expense_list(expense)
+                    print("-- Budget updated --")
+                
+                else:
+                    print("-- Please set a positive budget")
+                    print("Current Budget limit:", MY_BUDGET)
+            except ValueError:
+                print("-- Invalid input. Please enter a number.--")
 
         elif choice == "a":
             print("--- Add New Expense ---\n")
