@@ -66,7 +66,6 @@ def calculate_stats(expense_list, budget_limit):
 
     return total_spent, category_breakdown, payment_breakdown
 
-
 MENU = """
 a - Add Expense
 v - View All Expenses (Table View)
@@ -103,14 +102,9 @@ def display_stats(total_spent, category_breakdown, budget_limit, payment_breakdo
     print()
 
 def filter_by_category(expense_list, category):
-    matches = (e for e in expense_list if e["category"].lower() == category.lower())
+    matches = [e for e in expense_list if e["category"].lower() == category.lower()]
 
-    if not matches:
-        print(f"-- No expenses found for {category} --")
-
-    print(f"Expenses for {category}: \n")
-    for e in expense_list:
-        print(f"{e["items"]:20} : ₹{e["amount"]:8.2f}")
+    return matches
 
 def main():
     MY_BUDGET = 500
@@ -120,7 +114,7 @@ def main():
 
     while True:
         print(MENU)
-        choice = input("Enter your choice: \n")
+        choice = input("Enter your choice: \n").lower().strip()
 
         if choice == "a":
             print("--- Add New Expense ---\n")
@@ -156,6 +150,15 @@ def main():
             else:
                 total_spent, category_breakdown, payment_breakdown = calculate_stats(expense, MY_BUDGET)
                 display_stats(total_spent, category_breakdown, MY_BUDGET, payment_breakdown)
+
+        elif choice == "f":
+            target_category = input("Enter the category name: \n")
+            filtered = filter_by_category(expense, target_category)
+
+            print(f"\nExpenses for {target_category}:")
+            #for e in expense:
+            #    print(f"{e["item"]:20} : ₹{e["amount"]:8.2f}")
+            print_expenses(filtered)
 
         elif choice == "e":
             print("-- Goodbye --")
