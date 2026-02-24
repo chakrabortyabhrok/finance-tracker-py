@@ -124,7 +124,7 @@ def main():
             else:
                 date = user_date
             
-            item = input("Name of the item: \n")
+            item = input("Name of the item: \n").capitalize()
             while True:
                 try:
                     amount = float(input("Enter the amount: \n"))
@@ -134,9 +134,9 @@ def main():
                         print("-- Please enter a positve amount --")
                 except ValueError:
                     print("-- Invalid input. Please enter a number.--")
-            category = input("Enter the category: \n")
-            payment_method = input("Enter the payment method: \n")
-            notes = input("Enter a note:")
+            category = input("Enter the category: \n").capitalize()
+            payment_method = input("Enter the payment method: \n").capitalize()
+            notes = input("Enter a note:\n").capitalize()
             add_expense(expense, date, item, amount, category, payment_method, notes)
             save_expense_list(expense)
             print("-- Expense Added --")
@@ -156,9 +156,8 @@ def main():
             filtered = filter_by_category(expense, target_category)
 
             print(f"\nExpenses for {target_category}:")
-            #for e in expense:
-            #    print(f"{e["item"]:20} : ₹{e["amount"]:8.2f}")
             print_expenses(filtered)
+
 
         elif choice == "e":
             print("-- Goodbye --")
