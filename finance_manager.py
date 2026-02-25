@@ -64,4 +64,14 @@ def calculate_expense(expense_list):
             payment_breakdown = price
 
     return total_spent, category_breakdown, payment_breakdown
-              
+
+MENU = """
+c - Current Balance
+u - Update Current Budget
+a - Add Expense
+v - View All Expenses (Table View)
+s - Statistics & Summaries (Total spent, Budget check)
+f - Filter by Category
+d - Delete Expense
+e - Exit
+"""
