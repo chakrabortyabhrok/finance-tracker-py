@@ -2,7 +2,6 @@ import os
 import json
 from datetime import datetime
 
-#peristnce
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE_NAME = os.path.join(BASE_DIR, "finance_data.json")
 
@@ -20,3 +19,49 @@ def save_data(expense_list):
     with open(FILE_NAME, "w") as file:
         json.dump(expense_list, file, indent=4)
 
+def get_new_id(expense_list):
+    if not expense_list:
+        return 1
+    else:
+        return max(e["id"] for e in expense_list) + 1
+
+def add_expense(expense_list, date, item, amount, category, payment_method, notes):
+    new_expense = {
+        "id" : get_new_id(expense_list),
+        "date" : date,
+        "item" : item,
+        "amount": amount,
+        "category" : category,
+        "payment_method": payment_method,
+        "notes" : notes
+    }
+    expense_list.append(new_expense)
+
+def delete_expense(expense_list, delete_id):
+    for e in expense_list:
+        if delete_id == e["id"]:
+            expense_list.remove(e)
+            return True
+    return False
+
+def calculate_expense(expense_list):
+    total_spent = sum(e["amount"] for e in expense_list)
+    category_breakdown = {}
+    payment_breakdown = {}
+    for e in expense_list:
+        cat = e["category"]
+        price = e["amount"]
+        method = e["payment_method"]
+
+        if category_breakdown[cat]:
+            category_breakdown += category_breakdown[price]
+        else:
+            category_breakdown[cat] = price
+
+        if payment_breakdown[method]:
+            payment_breakdown += payment_breakdown[price]
+        else:
+            payment_breakdown = price
+
+    return total_spent, category_breakdown, payment_breakdown
+              
