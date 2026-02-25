@@ -43,7 +43,7 @@ def delete_expense(expense_list, id):
             return True
     return False
 
-def calculate_stats(expense_list, budget_limit):
+def calculate_stats(expense_list):
     total_spent = sum(e["amount"] for e in expense_list)
     category_breakdown = {}
     payment_breakdown = {}
