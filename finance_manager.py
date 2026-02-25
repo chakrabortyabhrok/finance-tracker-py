@@ -75,3 +75,12 @@ f - Filter by Category
 d - Delete Expense
 e - Exit
 """
+def print_expense(expense_list):
+    if not expense_list:
+        print("-- No expense recorded --")
+
+    print("ID |    DATE    |         ITEM         |   AMOUNT   |      CATEGORY      |      PAYMENT      |    NOTES  ")
+    print("-"*125)
+    for e in expense_list:
+        print(f"{e["id"]: <3} | {e["date"]: <12} | {e["item"]: <20} | {e["amount"]: <8} | {e["category"]: <20} | {e["payment"]: <15} | {e["notes"]}")
+    print("-" * 125)
