@@ -493,5 +493,14 @@
         "category": "Entertainment",
         "payment_method": "Credit Card",
         "notes": "Digital rental"
+    },
+    {
+        "id": 56,
+        "date": "2026-02-26",
+        "item": "Random",
+        "amount": 3.0,
+        "category": "Test",
+        "payment_method": "Cash",
+        "notes": "Test"
     }
 ]

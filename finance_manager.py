@@ -77,11 +77,11 @@ def print_expense(expense_list):
     if not expense_list:
         print("-- No expense recorded --")
 
-    print("ID |    DATE    |         ITEM         |   AMOUNT   |      CATEGORY      |      PAYMENT      |    NOTES  ")
-    print("-"*125)
+    print("ID  |    DATE    |           ITEM            |   AMOUNT   |       CATEGORY       |     PAYMENT     |     NOTES    ")
+    print("-"*120)
     for e in expense_list:
-        print(f"{e["id"]: <3} | {e["date"]: <12} | {e["item"]: <20} | {e["amount"]: <8} | {e["category"]: <20} | {e["payment"]: <15} | {e["notes"]}")
-    print("-" * 125)
+        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <25} | {e["amount"]: >10.2f} | {e["category"]: <20} | {e["payment_method"]: <15} | {e["notes"]}")
+    print("-"*120) 
 
 def display_stats(total_spent, category_breakdown, payment_breakdown, budget_limit):
     print(f"Total Spent: ₹{total_spent:.2f}")
@@ -118,7 +118,7 @@ def main():
             else:
                 date = user_date
 
-            item = input("Enter the item name: \n").strip()
+            item = input("Enter the item name: \n").capitalize()
 
             while True:
                 try:
@@ -130,17 +130,32 @@ def main():
                 except ValueError:
                     print("-- Please enter a number --")
 
-            category = input("Enter category: \n")
-            payment_method = input("Enter the payment method: \n")
-            notes = input("Enter note: \n")
-            add_expense(date, item, amount, category, payment_method, notes)
+            category = input("Enter category: \n").capitalize()
+            payment_method = input("Enter the payment method: \n").capitalize()
+            notes = input("Enter note: \n").capitalize()
+            add_expense(expense, date, item, amount, category, payment_method, notes)
             save_data(expense)
             print("-- Task added --")
 
         elif choice == "v":
             print_expense(expense)
 
-        elif choice== "s"
+        elif choice== "s":
+            if not expense:
+                print("-- No Expenses --")
+            else:
+                total_spent, category_breakdown, payment_breakdown = calculate_expense(expense)
+                display_stats(total_spent, category_breakdown, payment_breakdown, MY_BUDGET)
+
+        elif choice == "d"
+
+        elif choice == "e":
+            print("-- Goodbye --")
+            break
+
+        else:
+            print("Invalid choice, try again.")
+
 
 
 
