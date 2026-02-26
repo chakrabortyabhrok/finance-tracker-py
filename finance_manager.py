@@ -66,8 +66,6 @@ def calculate_expense(expense_list):
     return total_spent, category_breakdown, payment_breakdown
 
 MENU = """
-c - Current Balance
-u - Update Current Budget
 a - Add Expense
 v - View All Expenses (Table View)
 s - Statistics & Summaries (Total spent, Budget check)
@@ -101,3 +99,50 @@ def display_stats(total_spent, category_breakdown, payment_breakdown, budget_lim
 def filter_category(expense_list, category_name):
     matches = [e for e in expense_list if e["category"].lower() == category_name.lower()]
     return matches
+
+def main():
+    MY_BUDGET = 5000
+    expense = load_data()
+    print("-- Welcome to the Finance Manager !! --")
+    print(f"Current Budget: {MY_BUDGET}")
+
+    while True:
+        print(MENU)
+        choice = input("- Please Enter your choice: \n").lower().strip()
+
+        if choice == "a":
+            print("-- Add Expense --\n")
+            user_date = input("Input the date(YYYY-MM-DD) | ENTER FOR TODAY : \n").strip()
+            if user_date == "":
+                date = datetime.today().strftime("%Y-%m-%d")
+            else:
+                date = user_date
+
+            item = input("Enter the item name: \n").strip()
+
+            while True:
+                try:
+                    amount = float(input("Enter the amount: \n").strip())
+                    if amount > 0:
+                        break                      
+                    else:
+                        print("-- Please enter a positive amount --\n")
+                except ValueError:
+                    print("-- Please enter a number --")
+
+            category = input("Enter category: \n")
+            payment_method = input("Enter the payment method: \n")
+            notes = input("Enter note: \n")
+            add_expense(date, item, amount, category, payment_method, notes)
+            save_data(expense)
+            print("-- Task added --")
+
+        elif choice == "v":
+            print_expense(expense)
+
+        elif choice== "s"
+
+
+
+if __name__ == "__main__":
+    main()
