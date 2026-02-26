@@ -84,3 +84,20 @@ def print_expense(expense_list):
     for e in expense_list:
         print(f"{e["id"]: <3} | {e["date"]: <12} | {e["item"]: <20} | {e["amount"]: <8} | {e["category"]: <20} | {e["payment"]: <15} | {e["notes"]}")
     print("-" * 125)
+
+def display_stats(total_spent, category_breakdown, payment_breakdown, budget_limit):
+    print(f"Total Spent: ₹{total_spent:.2f}")
+    remaining_budget = total_spent - budget_limit
+    print(f"Remaining Budget: ₹{remaining_budget}")
+
+    print("\nCategory Breakdown: \n")
+    for category, amount in category_breakdown:
+        print(f"{category: 20}   ₹{amount: 8.2f}")
+
+    print("\nPayment Breakdown: \n")
+    for method, amount in payment_breakdown:
+        print(f"{method: 15}   ₹{amount: 8.2f}")
+
+def filter_category(expense_list, category_name):
+    matches = [e for e in expense_list if e["category"].lower() == category_name.lower()]
+    return matches
