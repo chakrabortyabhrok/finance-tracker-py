@@ -89,7 +89,7 @@ def print_expenses(expense_list):
     print("-"*120) 
 
 def display_stats(total_spent, category_breakdown, budget_limit, payment_breakdown):
-    print(f"Total spent: {total_spent:.2f}")
+    print(f"Total spent: ₹{total_spent:.2f}")
     print(f"Remaining Budget: {budget_limit - total_spent:.2f}")
     if total_spent > budget_limit:
         print("⚠️ WARNING: Over Budget!!")
