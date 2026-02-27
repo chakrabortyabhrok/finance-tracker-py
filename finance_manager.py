@@ -12,7 +12,7 @@ def load_data():
         with open(FILE_NAME, "r") as file:
             return json.load(file)
         
-    except json.JSONDecodeError():
+    except json.JSONDecodeError:
         return []
     
 def save_data(expense_list):
@@ -53,15 +53,15 @@ def calculate_expense(expense_list):
         price = e["amount"]
         method = e["payment_method"]
 
-        if category_breakdown[cat]:
-            category_breakdown += category_breakdown[price]
+        if cat in category_breakdown:
+            category_breakdown[cat] += price
         else:
             category_breakdown[cat] = price
 
-        if payment_breakdown[method]:
-            payment_breakdown += payment_breakdown[price]
+        if method in payment_breakdown:
+            payment_breakdown[method] += price
         else:
-            payment_breakdown = price
+            payment_breakdown[method] = price
 
     return total_spent, category_breakdown, payment_breakdown
 
@@ -80,21 +80,23 @@ def print_expense(expense_list):
     print("ID  |    DATE    |           ITEM            |   AMOUNT   |       CATEGORY       |     PAYMENT     |     NOTES    ")
     print("-"*120)
     for e in expense_list:
-        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <25} | {e["amount"]: >10.2f} | {e["category"]: <20} | {e["payment_method"]: <15} | {e["notes"]}")
+        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <25} | ₹{e["amount"]: >10.2f} | {e["category"]: <20} | {e["payment_method"]: <15} | {e["notes"]}")
     print("-"*120) 
 
 def display_stats(total_spent, category_breakdown, payment_breakdown, budget_limit):
     print(f"Total Spent: ₹{total_spent:.2f}")
-    remaining_budget = total_spent - budget_limit
+    remaining_budget = budget_limit - total_spent 
     print(f"Remaining Budget: ₹{remaining_budget}")
+    if total_spent > budget_limit:
+        print("-- WARNING: OVER BUDGET !! --")
 
     print("\nCategory Breakdown: \n")
-    for category, amount in category_breakdown:
-        print(f"{category: 20}   ₹{amount: 8.2f}")
+    for category, amount in category_breakdown.items():
+        print(f"{category:20}    ₹{amount:8.2f}")
 
     print("\nPayment Breakdown: \n")
-    for method, amount in payment_breakdown:
-        print(f"{method: 15}   ₹{amount: 8.2f}")
+    for method, amount in payment_breakdown.items():
+        print(f"{method:15}   ₹{amount:8.2f}")
 
 def filter_category(expense_list, category_name):
     matches = [e for e in expense_list if e["category"].lower() == category_name.lower()]
@@ -147,7 +149,21 @@ def main():
                 total_spent, category_breakdown, payment_breakdown = calculate_expense(expense)
                 display_stats(total_spent, category_breakdown, payment_breakdown, MY_BUDGET)
 
-        elif choice == "d"
+        elif choice == "f":
+            category_name = input("Enter the category name: \n").lower()
+            filtered_category = filter_category(expense, category_name)
+            print_expense(filtered_category)
+
+        elif choice == "d":
+            if not expense:
+                print("-- No Expenses to delete --")
+            else:
+                delete_id = int(input("Enter the expense id: \n"))
+                if delete_expense(expense, delete_id):
+                    save_data(expense)
+                    print("-- Task deleted --")
+                else:
+                    print("-- ID not found --")
 
         elif choice == "e":
             print("-- Goodbye --")
@@ -155,8 +171,6 @@ def main():
 
         else:
             print("Invalid choice, try again.")
-
-
 
 
 if __name__ == "__main__":
