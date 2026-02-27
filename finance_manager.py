@@ -1,43 +1,44 @@
-import os
 import json
+import os
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE_NAME = os.path.join(BASE_DIR, "finance_data.json")
 
-def load_data():
+def load_expense_list():
     if not os.path.exists(FILE_NAME):
-        return []
+        return[]
     try:
         with open(FILE_NAME, "r") as file:
             return json.load(file)
     except json.JSONDecodeError:
-        return []
-
-def save_data(expense_list):
-    with open(FILE_NAME, "w") as file:
+        return[]
+    
+def save_expense_list(expense_list):
+    with open (FILE_NAME, "w") as file:
         json.dump(expense_list, file, indent=4)
 
 def get_new_id(expense_list):
     if not expense_list:
         return 1
-    return max(e["id"] for e in expense_list) + 1
-
-def add_expense(expense_list, date, item, amount, category, payment_method, notes):
+    else:
+        return max(d["id"] for d in expense_list) +1
+    
+def add_expense(expense_list, date, item, amount, category,  payment_method, notes):
     new_expense = {
-        "id" : get_new_id(expense_list),
-        "date" : date,
-        "item" : item,
+        "id": get_new_id(expense_list),
+        "date": date,
+        "item": item,
         "amount": amount,
-        "category" : category,
+        "category": category,
         "payment_method": payment_method,
-        "notes" : notes
+        "notes": notes
     }
     expense_list.append(new_expense)
 
-def delete_expense(expense_list, delete_id):
+def delete_expense(expense_list, id):
     for e in expense_list:
-        if delete_id == e["id"]:
+        if e["id"] == id:
             expense_list.remove(e)
             return True
     return False
@@ -50,36 +51,42 @@ def calculate_stats(expense_list):
         cat = e["category"]
         price = e["amount"]
         method = e["payment_method"]
+
         if cat in category_breakdown:
             category_breakdown[cat] += price
+
         else:
             category_breakdown[cat] = price
+
         if method in payment_breakdown:
             payment_breakdown[method] += price
+
         else:
             payment_breakdown[method] = price
+
     return total_spent, category_breakdown, payment_breakdown
+
 
 MENU = """
 c - Current Balance
 u - Update Current Budget
 a - Add Expense
-v - View All Expenses
-s - Statistics & Summaries
+v - View All Expenses (Table View)
+s - Statistics & Summaries (Total spent, Budget check)
 f - Filter by Category
 d - Delete Expense
 e - Exit
 """
 
-def print_expense(expense_list):
+def print_expenses(expense_list):
     if not expense_list:
-        print("-- No expense recorded --")
-        return
-    print("ID | DATE | ITEM | AMOUNT | CATEGORY | PAYMENT | NOTES ")
+        print("-- No Expense Recorded --")
+
+    print("ID  |    DATE    |           ITEM            |   AMOUNT   |       CATEGORY       |     PAYMENT     |     NOTES    ")
     print("-"*120)
     for e in expense_list:
-        print(f"{e['id']: <3} | {e['date']: <10} | {e['item']: <25} | ₹{e['amount']: >10.2f} | {e['category']: <20} | {e['payment_method']: <15} | {e['notes']}")
-    print("-"*120)
+        print(f"{e["id"]: <3} | {e["date"]: <10} | {e["item"]: <25} | {e["amount"]: >10.2f} | {e["category"]: <20} | {e["payment_method"]: <15} | {e["notes"]}")
+    print("-"*120) 
 
 def display_stats(total_spent, category_breakdown, budget_limit, payment_breakdown):
     print(f"Total spent: ₹{total_spent:.2f}")
@@ -87,78 +94,114 @@ def display_stats(total_spent, category_breakdown, budget_limit, payment_breakdo
     if total_spent > budget_limit:
         print("⚠️ WARNING: Over Budget!!")
     
-    print("\nCategory Breakdown:")
+    print("\nCategory Breakdown:\n")
     for category, amount in category_breakdown.items():
-        print(f"{category:20} ₹{amount:8.2f}")
-    print("\nPayment Breakdown:")
-    for method, amount in payment_breakdown.items():
-        print(f"{method:15} ₹{amount:8.2f}")
+        print(f" {category:20}   ₹{amount: 8.2f}")
+    print()
 
-def filter_category(expense_list, category_name):
-    return [e for e in expense_list if e["category"].lower() == category_name.lower()]
+    print("\nPayment Breakdown:\n")
+    for payment, amount in payment_breakdown.items():
+        print(f"  {payment:20}  ₹{amount: 8.2f}")
+    print()
+
+def filter_by_category(expense_list, category):
+    matches = [e for e in expense_list if e["category"].lower() == category.lower()]
+
+    return matches
+
 
 def main():
     MY_BUDGET = 5000
-    expense = load_data()
-    print("-- Welcome to the Finance Manager !! --")
-    print(f"Current Budget: {MY_BUDGET}")
+    expense = load_expense_list()
+    print("-- Welcome to the Finance manager !! --")
+    print("Current Budget limit:", MY_BUDGET)
+
     while True:
         print(MENU)
-        choice = input("Enter your choice: ").lower().strip()
-        
+        choice = input("Enter your choice: \n").lower().strip()
+
         if choice == "c":
-            print(f"Current Budget: {MY_BUDGET}")
+            print(MY_BUDGET)
+
         elif choice == "u":
             try:
                 changed_budget = float(input("Enter the budget: \n"))
                 if changed_budget > 0:
                     MY_BUDGET = changed_budget
+                    save_expense_list(expense)
                     print("-- Budget updated --")
+                
                 else:
                     print("-- Please set a positive budget")
+                    print("Current Budget limit:", MY_BUDGET)
             except ValueError:
-                print("-- Invalid input --")
+                print("-- Invalid input. Please enter a number.--")
+
         elif choice == "a":
-            user_date = input("Input date (YYYY-MM-DD) or ENTER for today: ").strip()
-            date = user_date if user_date else datetime.today().strftime("%Y-%m-%d")
-            item = input("Enter item name: ").capitalize()
+            print("--- Add New Expense ---\n")
+            user_date = input("Enter date (DD-MM-YYYY) or press Enter for today: ").strip()
+            if user_date == "":
+                date = datetime.today().strftime("%Y-%m-%d")
+            else:
+                date = user_date
+            
+            item = input("Name of the item: \n").capitalize()
             while True:
                 try:
-                    amount = float(input("Enter amount: ").strip())
-                    if amount > 0: break
-                    print("-- Enter a positive amount --")
+                    amount = float(input("Enter the amount: \n"))
+                    if amount > 0:
+                        break
+                    else:
+                        print("-- Please enter a positve amount --")
                 except ValueError:
-                    print("-- Enter a valid number --")
-            category = input("Enter category: ").capitalize()
-            method = input("Enter payment method: ").capitalize()
-            notes = input("Enter note: ").capitalize()
-            add_expense(expense, date, item, amount, category, method, notes)
-            save_data(expense)
-            print("-- Expense added --")
+                    print("-- Invalid input. Please enter a number.--")
+
+            category = input("Enter the category: \n").capitalize()
+            payment_method = input("Enter the payment method: \n").capitalize()
+            notes = input("Enter a note:\n").capitalize()
+            add_expense(expense, date, item, amount, category, payment_method, notes)
+            save_expense_list(expense)
+            print("-- Expense Added --")
+
         elif choice == "v":
-            print_expense(expense)
+            print_expenses(expense)
+
         elif choice == "s":
             if not expense:
-                print("-- No Expenses --")
+                print("-- No expense found --")
             else:
-                total, cat_map, pay_map = calculate_stats(expense)
-                display_stats(total, cat_map, MY_BUDGET, pay_map)
+                total_spent, category_breakdown, payment_breakdown = calculate_stats(expense, MY_BUDGET)
+                display_stats(total_spent, category_breakdown, MY_BUDGET, payment_breakdown)
+
         elif choice == "f":
-            cat_name = input("Enter category: ").lower()
-            print_expense(filter_category(expense, cat_name))
+            target_category = input("Enter the category name: \n")
+            filtered = filter_by_category(expense, target_category)
+
+            print(f"\nExpenses for {target_category}:")
+            print_expenses(filtered)
+
         elif choice == "d":
-            try:
-                id_to_del = int(input("Enter ID to delete: "))
-                if delete_expense(expense, id_to_del):
-                    save_data(expense)
-                    print("-- Deleted --")
-                else:
-                    print("-- ID not found --")
-            except ValueError:
-                print("-- Invalid ID --")
+            if not expense:
+                print("-- No items to delete --")
+            else:
+                try:
+                    id_no = int(input("Enter the ID: \n"))
+                    if delete_expense(expense, id_no):
+                        save_expense_list(expense)
+                        print("-- Expense Deleted --")
+                    else:
+                        print("-- No tasks exists with given ID --")
+
+                except ValueError:
+                    print("-- Invalid input. Please enter a number. --")
+
         elif choice == "e":
             print("-- Goodbye --")
             break
+
+        else:
+            print("Invalid choice, try again.")
+
 
 if __name__ == "__main__":
     main()
