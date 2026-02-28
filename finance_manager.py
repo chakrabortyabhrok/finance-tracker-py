@@ -139,7 +139,7 @@ def main():
 
         elif choice == "a":
             print("--- Add New Expense ---\n")
-            user_date = input("Enter date (DD-MM-YYYY) or press Enter for today: ").strip()
+            user_date = input("Enter date (DD-MM-YYYY) or press Enter for today: \n").strip()
             if user_date == "":
                 date = datetime.today().strftime("%Y-%m-%d")
             else:
@@ -170,7 +170,7 @@ def main():
             if not expense:
                 print("-- No expense found --")
             else:
-                total_spent, category_breakdown, payment_breakdown = calculate_stats(expense, MY_BUDGET)
+                total_spent, category_breakdown, payment_breakdown = calculate_stats(expense)
                 display_stats(total_spent, category_breakdown, MY_BUDGET, payment_breakdown)
 
         elif choice == "f":
